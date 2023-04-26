@@ -4,12 +4,8 @@
 #include "render.h"
 #include "types.h"
 #include "keys.h"
-#define PLAYER_WIDTH 20
-#define PLAYER_HEIGHT 150
-#define PLAYER_OFFSET 30
-#define PLAYER_SPEED 10
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
+#include "check.h"
+#include "settings.h"
 
 class Paddle {
     public:
@@ -18,6 +14,7 @@ class Paddle {
             Paddle::y = xywh.getY();
             Paddle::w = xywh.getW();
             Paddle::h = xywh.getH();
+            Paddle::pos = xywh;            
             Paddle::texture = texture;
             Paddle::color = {0, 0, 0, 0};
         }
@@ -30,37 +27,24 @@ class Paddle {
             Paddle::SetColor(color);
         }
         void update(SDL_Renderer* renderer){
-            Paddle::Draw(renderer);
+            this->Draw(renderer);
         }
         void Handle_Key_Press(key key, bool left){
             if (left){
-                switch(key){
-                    case KEY_W: {
-                        Paddle::setY(Paddle::y - PLAYER_SPEED);
-                    } break;
-                    case KEY_S: {
-                        Paddle::setY(Paddle::y + PLAYER_SPEED);
-                    } break;
-                    default: {
-                        std::cout << key << std::endl;
-                        exit(1);
-                    } break;
+                if(key == KEY_W){
+                    std::cout << Ceiling_Collision(pos) << std::endl;;
+                    this->setY(this->y - PLAYER_SPEED);
+                }
+                else if(key == KEY_S){
+                    this->setY(this->y + PLAYER_SPEED);
                 }
             }
             else if(!left) {
-                switch(key){
-                    case KEY_W: break;
-                    case KEY_S: break;
-                    case SDLK_UP: {
-                        Paddle::setY(Paddle::y - PLAYER_SPEED);
-                    } break;
-                    case SDLK_DOWN: {
-                        Paddle::setY(Paddle::y + PLAYER_SPEED);
-                    } break;
-                    default: {
-                        std::cout << key << std::endl;
-                        exit(1);
-                    } break;
+                if(key == KEY_UP){
+                    this->setY(this->y - PLAYER_SPEED);
+                }
+                else if(key == KEY_DOWN){
+                    this->setY(this->y + PLAYER_SPEED);
                 }
             }
         }
@@ -72,11 +56,11 @@ class Paddle {
             Paddle::color.a = color.getH();
         }
         void Draw(SDL_Renderer* renderer){
-            if(Paddle::texture == NULL) {
-                Render_Rect(renderer, Paddle::x, Paddle::y, Paddle::w, Paddle::h, Paddle::color);
+            if(this->texture == NULL) {
+                Render_Rect(renderer, this->x, this->y, this->w, this->h, this->color);
             }
             else{
-                Render_Texture(Paddle::texture, renderer, vec2f(Paddle::x, Paddle::y));
+                Render_Texture(this->texture, renderer, vec2f(this->x, this->y));
             }
         }
         void setY(float y){
@@ -86,6 +70,7 @@ class Paddle {
         SDL_Color color;
         float x, y;
         float w, h;
+        vec4f pos;
         player_velocity velocity;
         player_speed speed;
 };

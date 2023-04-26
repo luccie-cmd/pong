@@ -4,24 +4,11 @@
 
 class Vec2f {
     public:
-        Vec2f(float x, float y){
-            Vec2f::x = x;
-            Vec2f::y = y;
-        }
-        Vec2f(int x, int y){
-            Vec2f::x = x;
-            Vec2f::y = y;
-        }
-        Vec2f(){
-            Vec2f::x = 0;
-            Vec2f::y = 0;
-        }
-        float getX(){
-            return Vec2f::x;
-        }
-        float getY(){
-            return Vec2f::y;
-        }
+        Vec2f(float x, float y);
+        Vec2f(int x, int y);
+        Vec2f();
+        float getX();
+        float getY();
     private:
         float x, y;
 };
@@ -30,36 +17,13 @@ class Vec2f {
 
 class Vec4f {
     public:
-        Vec4f(float x, float y, float w, float h){
-            Vec4f::x = x;
-            Vec4f::y = y;
-            Vec4f::w = w;
-            Vec4f::h = h;
-        }
-        Vec4f(int x, int y, int w, int h){
-            Vec4f::x = x;
-            Vec4f::y = y;
-            Vec4f::w = w;
-            Vec4f::h = h;
-        }
-        Vec4f(){
-            Vec4f::x = 0;
-            Vec4f::y = 0;
-            Vec4f::w = 0;
-            Vec4f::h = 0;
-        }
-        float getX(){
-            return Vec4f::x;
-        }
-        float getY(){
-            return Vec4f::y;
-        }
-        float getW(){
-            return Vec4f::w;
-        }
-        float getH(){
-            return Vec4f::h;
-        }
+        Vec4f(float x, float y, float w, float h);
+        Vec4f(int x, int y, int w, int h);
+        Vec4f();
+        float getX();
+        float getY();
+        float getW();
+        float getH();
     private: 
         float x, y;
         float w, h;
