@@ -1,0 +1,6 @@
+SDL2/
+lib/
+*.exe
+load.h
+check.h
+types.cpp
