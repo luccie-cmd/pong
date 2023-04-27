@@ -32,7 +32,7 @@ class Paddle {
         void Handle_Key_Press(key key, bool left){
             if (left){
                 if(key == KEY_W){
-                    std::cout << Ceiling_Collision(pos) << std::endl;;
+                                std::cout << Ceiling_Collision(this->pos) << std::endl;;
                     this->setY(this->y - PLAYER_SPEED);
                 }
                 else if(key == KEY_S){
@@ -65,6 +65,7 @@ class Paddle {
         }
         void setY(float y){
             Paddle::y = y;
+            Paddle::pos.y = y;
         }
         SDL_Texture* texture;
         SDL_Color color;
